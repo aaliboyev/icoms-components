@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.0.4
+
+### Patch Changes
+
+- 2d68de2: finished package configuration
+
 ## 0.0.3
 
 ### Patch Changes
