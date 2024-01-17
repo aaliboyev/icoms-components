@@ -2,9 +2,9 @@
   "name": "@aaliboyev/icoms-components",
   "version": "0.0.5",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "module": "dist/index.mjs",
+  "module": "dist/index.esm.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/aaliboyev/icoms-components.git"
@@ -15,7 +15,7 @@
   "homepage": "https://github.com/aaliboyev/icoms-components#readme",
   "type": "module",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "vite build",
     "release": "pnpm run build && changeset publish",
     "lint": "tsc",
     "dev": "vite",
@@ -26,6 +26,7 @@
   "license": "ISC",
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@storybook/addon-essentials": "^7.6.9",
     "@storybook/addon-interactions": "^7.6.9",
     "@storybook/addon-links": "^7.6.9",

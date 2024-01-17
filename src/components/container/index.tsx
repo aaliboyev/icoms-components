@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from '@stitches/react';
 
-interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode;
     style?: React.CSSProperties;
 }

@@ -10,5 +10,9 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-  }
+    "declaration": true,
+    "outDir": "dist",
+  },
+  "include": ["src"],
+  "exclude": ["src/stories/**/*"]
 }
