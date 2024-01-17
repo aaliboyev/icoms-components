@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.0.3
+
+### Patch Changes
+
+- 1fc5dae: added release escript
+
 ## 0.0.2
 
 ### Patch Changes
