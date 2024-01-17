@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.0.5
+
+### Patch Changes
+
+- 9d56e54: Added example container and accordion elements
+
 ## 0.0.4
 
 ### Patch Changes
