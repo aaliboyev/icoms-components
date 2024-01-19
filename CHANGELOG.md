@@ -1,5 +1,15 @@
 # icoms-components
 
+## 0.1.0
+
+### Minor Changes
+
+- 518340c: completed 7 components
+
+### Patch Changes
+
+- 2d75796: moved from tsup to vite bundler
+
 ## 0.0.5
 
 ### Patch Changes
