@@ -1,41 +1,39 @@
 import React from 'react';
-import * as Accordion from '@radix-ui/react-accordion';
-import { styled, keyframes } from '@stitches/react';
+import {
+    Root,
+    Content,
+    Trigger,
+    Header,
+    Item,
+    AccordionTriggerProps,
+    AccordionContentProps, AccordionItemProps
+} from '@radix-ui/react-accordion';
+import {AccordionSingleProps, AccordionMultipleProps} from "@radix-ui/react-accordion";
+import { styled, keyframes, CSSProperties } from '@stitches/react';
 import { violet, blackA, mauve } from '@radix-ui/colors';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
-import {AccordionContentProps, AccordionTriggerProps} from "@radix-ui/react-accordion";
 
-const AccordionDemo: React.FC = () => (
-    <AccordionRoot type="single" defaultValue="item-1" collapsible>
-        <AccordionItem value="item-1">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
-        </AccordionItem>
 
-        <AccordionItem value="item-2">
-            <AccordionTrigger>Is it unstyled?</AccordionTrigger>
-            <AccordionContent>
-                Yes. It's unstyled by default, giving you freedom over the look and feel.
-            </AccordionContent>
-        </AccordionItem>
+// Accordion Root
+const StyledAccordionRoot = styled(Root, {});
+export type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) & React.RefAttributes<HTMLDivElement> & {
+    styles?: {
+        root: CSSProperties;
+    };
+}
 
-        <AccordionItem value="item-3">
-            <AccordionTrigger>Can it be animated?</AccordionTrigger>
-            <AccordionContent>
-                Yes! You can animate the Accordion with CSS or JavaScript.
-            </AccordionContent>
-        </AccordionItem>
-    </AccordionRoot>
-);
+export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>((
+    { children, styles, ...rest },
+    forwardedRef
+) => (
+    <StyledAccordionRoot ref={forwardedRef} css={{...styles?.root}} {...rest}>
+        {children}
+    </StyledAccordionRoot>
+));
 
-const AccordionRoot = styled(Accordion.Root, {
-    borderRadius: 6,
-    width: 300,
-    backgroundColor: mauve.mauve6,
-    boxShadow: `0 2px 10px ${blackA.blackA2}`,
-});
 
-const AccordionItem = styled(Accordion.Item, {
+// Accordion Item
+const StyledItem = styled(Item, {
     overflow: 'hidden',
     marginTop: 1,
 
@@ -56,28 +54,27 @@ const AccordionItem = styled(Accordion.Item, {
         boxShadow: `0 0 0 2px ${mauve.mauve12}`,
     },
 });
+export type ItemProps = AccordionItemProps & {
+    styles?: {
+        root: CSSProperties;
+    };
+}
 
-const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(({ children, ...props }, forwardedRef) => (
-    <StyledHeader>
-        <StyledTrigger {...props} ref={forwardedRef}>
-            {children}
-            <StyledChevron aria-hidden />
-        </StyledTrigger>
-    </StyledHeader>
-));
+export const AccordionItem = React.forwardRef<HTMLDivElement, ItemProps>((
+    {children, styles, ...rest},
+    forwardedRef
+) => (
+    <StyledItem css={{...styles?.root}} ref={forwardedRef} {...rest}>
+        {children}
+    </StyledItem>
+))
 
-const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(({ children, ...props }, forwardedRef) => (
-    <StyledContent {...props} ref={forwardedRef}>
-        <StyledContentText>{children}</StyledContentText>
-    </StyledContent>
-));
-
-const StyledHeader = styled(Accordion.Header, {
+// Accordion Trigger
+const StyledHeader = styled(Header, {
     all: 'unset',
     display: 'flex',
 });
-
-const StyledTrigger = styled(Accordion.Trigger, {
+const StyledTrigger = styled(Trigger, {
     all: 'unset',
     fontFamily: 'inherit',
     padding: '0 20px',
@@ -93,24 +90,42 @@ const StyledTrigger = styled(Accordion.Trigger, {
     backgroundColor: 'white',
     '&:hover': { backgroundColor: mauve.mauve2 },
 });
-
 const StyledChevron = styled(ChevronDownIcon, {
     color: violet.violet10,
     transition: 'transform 300ms cubic-bezier(0.87, 0, 0.13, 1)',
     '[data-state=open] &': { transform: 'rotate(180deg)' },
 });
 
+export type TriggerProps = AccordionTriggerProps & {
+    styles?: {
+        root: CSSProperties;
+        trigger: CSSProperties;
+        header: CSSProperties;
+    }
+}
+
+export const AccordionTrigger = React.forwardRef<HTMLButtonElement, TriggerProps>((
+    { children, styles, ...rest },
+    forwardedRef
+) => (
+    <StyledHeader css={{...styles?.header}}>
+        <StyledTrigger css={{...styles?.root}} {...rest} ref={forwardedRef}>
+            {children}
+            <StyledChevron css={{...styles?.trigger}} aria-hidden />
+        </StyledTrigger>
+    </StyledHeader>
+));
+
+// Accordion Content
 const slideDown = keyframes({
     from: { height: 0 },
     to: { height: 'var(--radix-accordion-content-height)' },
 });
-
 const slideUp = keyframes({
     from: { height: 'var(--radix-accordion-content-height)' },
     to: { height: 0 },
 });
-
-const StyledContent = styled(Accordion.Content, {
+const StyledContent = styled(Content, {
     overflow: 'hidden',
     fontSize: 15,
     color: mauve.mauve11,
@@ -123,9 +138,17 @@ const StyledContent = styled(Accordion.Content, {
         animation: `${slideUp} 300ms cubic-bezier(0.87, 0, 0.13, 1)`,
     },
 });
+export type ContentProps = AccordionContentProps & {
+    styles?: {
+        root: CSSProperties;
+    };
+}
 
-const StyledContentText = styled('div', {
-    padding: '15px 20px',
-});
-
-export default AccordionDemo;
+export const AccordionContent = React.forwardRef<HTMLDivElement, ContentProps>((
+    { children, styles, ...rest },
+    forwardedRef
+) => (
+    <StyledContent css={{...styles?.root}} {...rest} ref={forwardedRef}>
+        {children}
+    </StyledContent>
+));
