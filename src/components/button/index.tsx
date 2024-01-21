@@ -5,7 +5,6 @@ export type StyleProps = {
     styles?: {
         root: Record<string, any>
     }
-    "action": "button" | "submit" | "reset"
 }
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & StyleProps
@@ -13,13 +12,13 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & StyleP
 const StyledButton = styled('button', {});
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ styles, action, ...rest }, ref) => {
+    ({ children, styles, ...rest }, ref) => {
         return (
             <StyledButton
-                ref={ref as React.Ref<HTMLButtonElement>}
+                ref={ref}
                 css={{...styles?.root}}
                 {...rest}
-            />
+            >{children}</StyledButton>
         )
     }
 )

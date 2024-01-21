@@ -45,11 +45,14 @@ function useCarousel() {
 }
 
 // Carousel
-
 const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & CarouselProps>(
-    ({orientation = "horizontal", opts, setApi,          plugins,
-            children,
-            ...props
+    ({
+         children,
+         orientation = "horizontal",
+         opts,
+         setApi,
+         plugins,
+         ...props
         },
         ref
     ) => {
@@ -121,8 +124,7 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
                     carouselRef,
                     api: api,
                     opts,
-                    orientation:
-                        orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
+                    orientation: orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
                     scrollPrev,
                     scrollNext,
                     canScrollPrev,
@@ -209,8 +211,8 @@ const CarouselPrevious = React.forwardRef<
     let baseStyles = {
         position: "absolute",
         borderRadius: "50%",
-        width: "2rem",
-        height: "2rem",
+        width: "1.5rem",
+        height: "1.5rem",
         left: "-3rem",
         top: "50%",
         transform: "translateY(-50%)",
@@ -230,10 +232,6 @@ const CarouselPrevious = React.forwardRef<
             onClick={scrollPrev}
             {...props}
         >
-            <ArrowLeftIcon style={{
-                width: "1.5rem",
-                height: "1.5rem",
-            }} />
             <SrOnlySpan />
         </Button>
     )
@@ -250,11 +248,13 @@ const CarouselNext = React.forwardRef<
     let baseStyles = {
         position: "absolute",
         borderRadius: "50%",
-        width: "2rem",
-        height: "2rem",
+        width: "1.5rem",
+        height: "1.5rem",
+    }
+    let h = {
         right: "-3rem",
         top: "50%",
-        transform: "translateY(-50%)",
+        transform: "translateY(-50%)"
     }
     let v = {
         bottom: "-3rem",
@@ -262,6 +262,7 @@ const CarouselNext = React.forwardRef<
         transform: "translateX(-50%) rotate(90deg)",
     }
     if (orientation === "vertical") baseStyles = {...baseStyles, ...v}
+    else baseStyles = {...baseStyles, ...h}
     let style = {...baseStyles, ...props.styles?.root}
 
     return (
@@ -272,10 +273,6 @@ const CarouselNext = React.forwardRef<
             onClick={scrollNext}
             {...props}
         >
-            <ArrowRightIcon style={{
-                width: "1.5rem",
-                height: "1.5rem",
-            }} />
             <SrOnlySpan />
         </Button>
     )
@@ -283,8 +280,40 @@ const CarouselNext = React.forwardRef<
 
 CarouselNext.displayName = "CarouselNext"
 
+const CarouselDemo = () => {
+    return <Carousel styles={{
+        root: {
+            width: "100%",
+            maxWidth: "100%",
+        }
+    }}>
+        <CarouselContent>
+            {Array.from({ length: 5 }).map((_, index) => (
+                <CarouselItem key={index}>
+                    <div style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "1.5rem",
+                        backgroundColor: "#eee",
+                        borderRadius: "0.5rem",
+                    }}>
+                        <span style={{
+                            fontSize: "4rem",
+                            fontWeight: 600,
+                        }}>{index + 1}</span>
+                    </div>
+                </CarouselItem>
+            ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+    </Carousel>
+}
+
 export {
-    type CarouselApi,
+    CarouselApi,
+    CarouselDemo,
     Carousel,
     CarouselContent,
     CarouselItem,
