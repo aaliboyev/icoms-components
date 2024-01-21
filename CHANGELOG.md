@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.2.0
+
+### Minor Changes
+
+- 627f9fb: Added some more complex components like Video Player, Menubar and Modal dialog
+
 ## 0.1.0
 
 ### Minor Changes
