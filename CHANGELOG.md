@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.3.1
+
+### Patch Changes
+
+- 1dc8b3d: added readme.md
+
 ## 0.3.0
 
 ### Minor Changes
