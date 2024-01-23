@@ -1,47 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, {HTMLAttributes} from 'react';
+import {styled} from '@stitches/react';
+import {CSSProps} from "../../types";
 
-// Types
-interface GridRowProps {
-    children: React.ReactNode;
-}
+const StyledGrid = styled('div', {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(12, 1fr)',
+    gridGap: '1rem',
+    padding: '1rem',
+})
 
-interface GridColumnProps {
-    children: React.ReactNode;
-}
+const Grid = React.forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>& {css: CSSProps}>(
+    ({children, css, ...props}, ref) => {
+    return <StyledGrid css={css} {...props} ref={ref}>{children}</StyledGrid>
+})
 
-interface GridItemProps {
-    children: React.ReactNode;
-}
+const StyledGridItem = styled('div', {
+    display: 'flex',
+    flexWrap: 'wrap',
+})
 
-// Styled Components
-const StyledGridRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
+const GridItem = React.forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>& {css: CSSProps}>(
+    ({children, css, ...props}, ref) => {
+    return <StyledGridItem css={css} {...props} ref={ref}>{children}</StyledGridItem>
+})
 
-const StyledGridColumn = styled.div`
-  flex: 1;
-  min-width: 0; /* Allow columns to shrink beyond their content width */
-`;
-
-const StyledGridItem = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  min-width: 0; /* Allow items to shrink beyond their content width */
-`;
-
-// Components
-const GridRow: React.FC<GridRowProps> = ({ children }) => (
-    <StyledGridRow>{children}</StyledGridRow>
-);
-
-const GridColumn: React.FC<GridColumnProps> = ({ children }) => (
-    <StyledGridColumn>{children}</StyledGridColumn>
-);
-
-const GridItem: React.FC<GridItemProps> = ({ children }) => (
-    <StyledGridItem>{children}</StyledGridItem>
-);
-
-export { GridRow, GridColumn, GridItem };
+export {Grid, GridItem}
