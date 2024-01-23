@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.3.2
+
+### Patch Changes
+
+- b88e36e: updated grid added separate flexbox
+
 ## 0.3.1
 
 ### Patch Changes
