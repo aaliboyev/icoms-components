@@ -6,6 +6,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons"
 import Button from "../button"
 import {styled} from "@stitches/react";
 import {SrOnlySpan} from "../../utils/styles";
+import {CSSProps} from "../../types";
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -148,13 +149,9 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 Carousel.displayName = "Carousel"
 
 // Carousel Content
-export type CarouselContentProps = React.HTMLAttributes<HTMLDivElement> & {
-    styles?: {
-        root: Record<string, any>
-    }
-}
+export type CarouselContentProps = React.HTMLAttributes<HTMLDivElement> & CSSProps
 const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
-    ({ className, ...props }, ref) => {
+    ({ children, css, ...props }, ref) => {
     const { carouselRef, orientation } = useCarousel()
     let baseStyles = orientation === "horizontal"
         ? {display: "flex", marginLeft: "-1rem"}
@@ -163,22 +160,18 @@ const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
         <div ref={carouselRef} style={{overflow: "hidden"}}>
             <StyledDiv
                 ref={ref}
-                css={{...baseStyles, ...props.styles?.root}}
+                css={{...baseStyles, ...css}}
                 {...props}
-            />
+            >{children}</StyledDiv>
         </div>
     )
 })
 CarouselContent.displayName = "CarouselContent"
 
 // Carousel Item
-type CarouselItemProps = React.HTMLAttributes<HTMLDivElement> & {
-    styles?: {
-        root: Record<string, any>
-    }
-}
+type CarouselItemProps = React.HTMLAttributes<HTMLDivElement> & CSSProps
 const CarouselItem = React.forwardRef<HTMLDivElement, CarouselItemProps>(
-    (props, ref) => {
+    ({css, ...props}, ref) => {
     const { orientation } = useCarousel()
     let baseStyles = {
         minWidth: 0,
@@ -195,7 +188,7 @@ const CarouselItem = React.forwardRef<HTMLDivElement, CarouselItemProps>(
             ref={ref}
             role="group"
             aria-roledescription="slide"
-            css={{...baseStyles, ...props.styles?.root}}
+            css={{...baseStyles, ...css}}
             {...props}
         />
     )
@@ -206,7 +199,7 @@ CarouselItem.displayName = "CarouselItem"
 const CarouselPrevious = React.forwardRef<
     HTMLButtonElement,
     React.ComponentProps<typeof Button>
->((props, ref) => {
+>(({children, css, ...props}, ref) => {
     const { orientation, scrollPrev, canScrollPrev } = useCarousel()
     let baseStyles = {
         position: "absolute",
@@ -223,15 +216,16 @@ const CarouselPrevious = React.forwardRef<
         transform: "translateX(-50%) rotate(90deg)",
     }
     if (orientation === "vertical") baseStyles = {...baseStyles, ...v}
-    let style = {...baseStyles, ...props.styles?.root}
+    let style = {...baseStyles, ...css}
     return (
         <Button
             ref={ref}
-            styles={{root: style}}
+            css={style}
             disabled={!canScrollPrev}
             onClick={scrollPrev}
             {...props}
         >
+            {children}
             <SrOnlySpan />
         </Button>
     )
@@ -242,8 +236,8 @@ CarouselPrevious.displayName = "CarouselPrevious"
 // Carousel Next
 const CarouselNext = React.forwardRef<
     HTMLButtonElement,
-    React.ComponentProps<typeof Button>
->((props, ref) => {
+    React.ComponentProps<typeof Button> & CSSProps
+>(({children, css, ...props}, ref) => {
     const { orientation, scrollNext, canScrollNext } = useCarousel()
     let baseStyles = {
         position: "absolute",
@@ -263,12 +257,12 @@ const CarouselNext = React.forwardRef<
     }
     if (orientation === "vertical") baseStyles = {...baseStyles, ...v}
     else baseStyles = {...baseStyles, ...h}
-    let style = {...baseStyles, ...props.styles?.root}
+    let style = {...baseStyles, ...css}
 
     return (
         <Button
             ref={ref}
-            styles={{root: style}}
+            css={style}
             disabled={!canScrollNext}
             onClick={scrollNext}
             {...props}
@@ -280,40 +274,8 @@ const CarouselNext = React.forwardRef<
 
 CarouselNext.displayName = "CarouselNext"
 
-const CarouselDemo = () => {
-    return <Carousel styles={{
-        root: {
-            width: "100%",
-            maxWidth: "100%",
-        }
-    }}>
-        <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
-                <CarouselItem key={index}>
-                    <div style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        padding: "1.5rem",
-                        backgroundColor: "#eee",
-                        borderRadius: "0.5rem",
-                    }}>
-                        <span style={{
-                            fontSize: "4rem",
-                            fontWeight: 600,
-                        }}>{index + 1}</span>
-                    </div>
-                </CarouselItem>
-            ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-    </Carousel>
-}
-
 export {
     CarouselApi,
-    CarouselDemo,
     Carousel,
     CarouselContent,
     CarouselItem,

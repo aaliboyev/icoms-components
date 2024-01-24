@@ -11,7 +11,7 @@ const StyledSeparator = styled(SeparatorPrimitive.Root, {
 })
 const Separator = React.forwardRef<
     React.ElementRef<typeof SeparatorPrimitive.Root>,
-    React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> & {css: CSSProps}
+    React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> & CSSProps
 >(
     (
         { css, orientation = "horizontal", decorative = true, ...props },

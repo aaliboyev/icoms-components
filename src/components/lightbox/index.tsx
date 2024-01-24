@@ -5,5 +5,4 @@ const Lightbox = React.forwardRef(({photos, layout, ...rest}: PhotoAlbumProps, r
     return <PhotoAlbum layout={layout} photos={photos} {...rest} />;
 });
 
-
 export default Lightbox;

@@ -1,12 +1,10 @@
 import React from 'react';
 import { Content, Close, Root, Trigger, Overlay, Portal,
     DialogTriggerProps, DialogOverlayProps, DialogContentProps, DialogCloseProps } from '@radix-ui/react-dialog';
-import type * as Stitches from '@stitches/react';
 import {styled, keyframes} from '@stitches/react';
 import { violet, blackA } from '@radix-ui/colors';
 import { Cross2Icon } from '@radix-ui/react-icons';
-
-type CSSStyles = {css: Stitches.CSS};
+import {CSSProps} from "../../types";
 
 const overlayShow = keyframes({
     '0%': { opacity: 0 },
@@ -70,13 +68,13 @@ const StyledDialogClose = styled(Close, {
     '&:focus': { boxShadow: `0 0 0 2px ${violet.violet7}` },
 });
 
-const DialogOverlay = React.forwardRef<HTMLDivElement, DialogOverlayProps & CSSStyles>(
+const DialogOverlay = React.forwardRef<HTMLDivElement, DialogOverlayProps & CSSProps>(
     ({css, ...props}, forwardedRef) => (
         <StyledDialogOverlay css={css} ref={forwardedRef} {...props} />
     )
 );
 
-const DialogTrigger = React.forwardRef<HTMLButtonElement, DialogTriggerProps & CSSStyles>(
+const DialogTrigger = React.forwardRef<HTMLButtonElement, DialogTriggerProps & CSSProps>(
     ({children, css, asChild, ...props}, forwardedRef) => (
         <StyledDialogTrigger asChild={asChild} css={css} ref={forwardedRef} {...props}>
             {asChild && children ? children : "Open"}
@@ -84,7 +82,7 @@ const DialogTrigger = React.forwardRef<HTMLButtonElement, DialogTriggerProps & C
     )
 );
 
-const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps & CSSStyles>(
+const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps & CSSProps>(
     ({children, css, ...props}, forwardedRef) => (
         <StyledDialogContent ref={forwardedRef} css={css} {...props}>
             {children}
@@ -92,7 +90,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps & CSSS
     )
 );
 
-const DialogClose = React.forwardRef<HTMLButtonElement, DialogCloseProps & CSSStyles>(
+const DialogClose = React.forwardRef<HTMLButtonElement, DialogCloseProps & CSSProps>(
     ({children, css, asChild, ...props}, forwardedRef) => (
         <StyledDialogClose asChild={asChild} css={css} ref={forwardedRef} {...props}>
             {asChild && children ? children : <Cross2Icon />}

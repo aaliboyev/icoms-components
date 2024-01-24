@@ -11,7 +11,7 @@ const StyledTable = styled("table", {
 
 const Table = React.forwardRef<
     HTMLTableElement,
-    React.HTMLAttributes<HTMLTableElement> & {css: CSSProps}
+    React.HTMLAttributes<HTMLTableElement> & CSSProps
 >(({ css, ...props }, ref) => (
     <StyledTable
         ref={ref}
@@ -31,7 +31,7 @@ const StyledTableHeader = styled("thead", {
 })
 const TableHeader = React.forwardRef<
     HTMLTableSectionElement,
-    React.HTMLAttributes<HTMLTableSectionElement> & {css: CSSProps}
+    React.HTMLAttributes<HTMLTableSectionElement> & CSSProps
 >(({ css, ...props }, ref) => (
     <StyledTableHeader ref={ref} css={css} {...props} />
 ))
@@ -49,7 +49,7 @@ const StyledTableBody = styled("tbody", {
 
 const TableBody = React.forwardRef<
     HTMLTableSectionElement,
-    React.HTMLAttributes<HTMLTableSectionElement> & {css: CSSProps}
+    React.HTMLAttributes<HTMLTableSectionElement> & CSSProps
 >(({ css, ...props }, ref) => (
     <StyledTableBody
         ref={ref}
@@ -69,7 +69,7 @@ const StyledTableFooter = styled("tfoot", {
 })
 const TableFooter = React.forwardRef<
     HTMLTableSectionElement,
-    React.HTMLAttributes<HTMLTableSectionElement> & {css: CSSProps}
+    React.HTMLAttributes<HTMLTableSectionElement> & CSSProps
 >(({ css, ...props }, ref) => (
     <StyledTableFooter
         ref={ref}
@@ -89,7 +89,7 @@ const StyledTableRow = styled("tr", {
 
 const TableRow = React.forwardRef<
     HTMLTableRowElement,
-    React.HTMLAttributes<HTMLTableRowElement> & {css: CSSProps}
+    React.HTMLAttributes<HTMLTableRowElement> & CSSProps
 >(({ css, ...props }, ref) => (
     <StyledTableRow
         ref={ref}
@@ -110,7 +110,7 @@ const StyledTableHeaderCell = styled("th", {
 })
 const TableHead = React.forwardRef<
     HTMLTableCellElement,
-    React.ThHTMLAttributes<HTMLTableCellElement> & {css: CSSProps}
+    React.ThHTMLAttributes<HTMLTableCellElement> & CSSProps
 >(({ css, ...props }, ref) => (
     <StyledTableHeaderCell
         ref={ref}
@@ -128,10 +128,11 @@ const StyledTableCell = styled("td", {
 
 const TableCell = React.forwardRef<
     HTMLTableCellElement,
-    React.TdHTMLAttributes<HTMLTableCellElement> & {css: CSSProps}
->((props, ref) => (
-    <td
+    React.TdHTMLAttributes<HTMLTableCellElement> & CSSProps
+>(({css, ...props}, ref) => (
+    <StyledTableCell
         ref={ref}
+        css={css}
         {...props}
     />
 ))

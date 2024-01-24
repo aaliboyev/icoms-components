@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
 import {
     Root,
     Content,
@@ -12,21 +12,17 @@ import {AccordionSingleProps, AccordionMultipleProps} from "@radix-ui/react-acco
 import { styled, keyframes, CSSProperties } from '@stitches/react';
 import { violet, blackA, mauve } from '@radix-ui/colors';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
+import {CSSProps} from "../../types";
 
 
 // Accordion Root
 const StyledAccordionRoot = styled(Root, {});
-export type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) & React.RefAttributes<HTMLDivElement> & {
-    styles?: {
-        root: CSSProperties;
-    };
-}
-
-export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>((
-    { children, styles, ...rest },
+type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) & React.RefAttributes<HTMLDivElement> & CSSProps
+const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>((
+    { children, css, ...rest },
     forwardedRef
 ) => (
-    <StyledAccordionRoot ref={forwardedRef} css={{...styles?.root}} {...rest}>
+    <StyledAccordionRoot ref={forwardedRef} css={{css}} {...rest}>
         {children}
     </StyledAccordionRoot>
 ));
@@ -54,17 +50,13 @@ const StyledItem = styled(Item, {
         boxShadow: `0 0 0 2px ${mauve.mauve12}`,
     },
 });
-export type ItemProps = AccordionItemProps & {
-    styles?: {
-        root: CSSProperties;
-    };
-}
+type ItemProps = AccordionItemProps & CSSProps
 
-export const AccordionItem = React.forwardRef<HTMLDivElement, ItemProps>((
-    {children, styles, ...rest},
+const AccordionItem = React.forwardRef<HTMLDivElement, ItemProps>((
+    {children, css, ...rest},
     forwardedRef
 ) => (
-    <StyledItem css={{...styles?.root}} ref={forwardedRef} {...rest}>
+    <StyledItem css={css} ref={forwardedRef} {...rest}>
         {children}
     </StyledItem>
 ))
@@ -74,6 +66,16 @@ const StyledHeader = styled(Header, {
     all: 'unset',
     display: 'flex',
 });
+
+const AccordionItemHeader = React.forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement> & CSSProps>(
+    ({children, css, ...props}, ref)=>{
+
+    return <StyledHeader ref={ref} css={css} {...props}>
+        {children}
+    </StyledHeader>
+})
+
+
 const StyledTrigger = styled(Trigger, {
     all: 'unset',
     fontFamily: 'inherit',
@@ -90,30 +92,16 @@ const StyledTrigger = styled(Trigger, {
     backgroundColor: 'white',
     '&:hover': { backgroundColor: mauve.mauve2 },
 });
-const StyledChevron = styled(ChevronDownIcon, {
-    color: violet.violet10,
-    transition: 'transform 300ms cubic-bezier(0.87, 0, 0.13, 1)',
-    '[data-state=open] &': { transform: 'rotate(180deg)' },
-});
 
-export type TriggerProps = AccordionTriggerProps & {
-    styles?: {
-        root: CSSProperties;
-        trigger: CSSProperties;
-        header: CSSProperties;
-    }
-}
+type TriggerProps = AccordionTriggerProps & CSSProps
 
-export const AccordionTrigger = React.forwardRef<HTMLButtonElement, TriggerProps>((
-    { children, styles, ...rest },
+const AccordionItemTrigger = React.forwardRef<HTMLButtonElement, TriggerProps>((
+    { children, css, ...rest },
     forwardedRef
 ) => (
-    <StyledHeader css={{...styles?.header}}>
-        <StyledTrigger css={{...styles?.root}} {...rest} ref={forwardedRef}>
-            {children}
-            <StyledChevron css={{...styles?.trigger}} aria-hidden />
-        </StyledTrigger>
-    </StyledHeader>
+    <StyledTrigger css={css} {...rest} ref={forwardedRef}>
+        {children}
+    </StyledTrigger>
 ));
 
 // Accordion Content
@@ -138,17 +126,21 @@ const StyledContent = styled(Content, {
         animation: `${slideUp} 300ms cubic-bezier(0.87, 0, 0.13, 1)`,
     },
 });
-export type ContentProps = AccordionContentProps & {
-    styles?: {
-        root: CSSProperties;
-    };
-}
+type ContentProps = AccordionContentProps & CSSProps
 
-export const AccordionContent = React.forwardRef<HTMLDivElement, ContentProps>((
-    { children, styles, ...rest },
+const AccordionItemContent = React.forwardRef<HTMLDivElement, ContentProps>((
+    { children, css, ...rest },
     forwardedRef
 ) => (
-    <StyledContent css={{...styles?.root}} {...rest} ref={forwardedRef}>
+    <StyledContent css={css} {...rest} ref={forwardedRef}>
         {children}
     </StyledContent>
 ));
+
+export {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeader,
+    AccordionItemTrigger,
+    AccordionItemContent
+}

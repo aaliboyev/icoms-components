@@ -6,7 +6,7 @@ import * as Menubar from "./components/menubar";
 import * as Grid from "./components/grid";
 import * as Flexbox from "./components/flexbox";
 import * as Table from "./components/table";
-import Popover from "./components/popover";
+import * as Popover from "./components/popover";
 import Separator from "./components/separator";
 import Video from "./components/video";
 import Container from "./components/container";

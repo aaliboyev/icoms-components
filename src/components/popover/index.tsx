@@ -1,16 +1,7 @@
 import * as React from "react"
 import * as PopoverPrimitive from "@radix-ui/react-popover"
 import {styled} from "@stitches/react";
-
-type PopoverProps = {
-    styles: {
-        root?: React.CSSProperties
-        trigger?: React.CSSProperties
-    },
-    trigger: PopoverPrimitive.PopoverTriggerProps
-    content: PopoverPrimitive.PopperContentProps
-    children: React.ReactNode
-}
+import {CSSProps} from "../../types";
 
 const StyledTrigger = styled(PopoverPrimitive.Trigger, {
     backgroundColor: "#444",
@@ -39,22 +30,30 @@ const StyledContent = styled(PopoverPrimitive.Content, {
     },
 })
 
-const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
-    ({ children, styles, content, trigger }, ref) => (
-        <PopoverPrimitive.Root>
-            <StyledTrigger css={{...styles.trigger}} {...trigger} />
-            <PopoverPrimitive.Portal>
-                <StyledContent
-                    ref={ref}
-                    align={content.align}
-                    sideOffset={content.sideOffset}
-                    css={{...styles.root}}
-                >
-                    {children}
-                </StyledContent>
-            </PopoverPrimitive.Portal>
-        </PopoverPrimitive.Root>
+const Popover = PopoverPrimitive.Root
+const PopoverPortal = PopoverPrimitive.Portal
+const PopoverTrigger = React.forwardRef<HTMLDivElement, PopoverPrimitive.PopoverTriggerProps & CSSProps>(
+    ({ children, css, ...props }, ref) => (
+        <StyledTrigger css={css} {...props}>{children}</StyledTrigger>
     )
 )
 
-export default Popover
+
+const PopoverContent = React.forwardRef<HTMLDivElement, PopoverPrimitive.PopoverContentProps & CSSProps>(
+    ({ children, css, ...props }, ref) => (
+        <StyledContent
+            ref={ref}
+            css={css}
+            {...props}
+        >
+            {children}
+        </StyledContent>
+    )
+)
+
+export {
+    PopoverTrigger,
+    PopoverContent,
+    PopoverPortal,
+    Popover
+}

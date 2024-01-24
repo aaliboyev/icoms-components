@@ -1,7 +1,17 @@
 import React from 'react';
-import {Trigger, Content, Root, List, TabsProps as TabsPropsOriginal, TabsListProps} from '@radix-ui/react-tabs';
+import {
+    Trigger,
+    Content,
+    Root,
+    List,
+    TabsProps,
+    TabsListProps,
+    TabsTriggerProps,
+    TabsContentProps
+} from '@radix-ui/react-tabs';
 import { styled } from '@stitches/react';
 import { violet, mauve, blackA, green } from '@radix-ui/colors';
+import {CSSProps} from "../../types";
 
 const StyledTabs = styled(Root, {
     display: 'flex',
@@ -10,19 +20,10 @@ const StyledTabs = styled(Root, {
     boxShadow: `0 2px 10px ${blackA.blackA2}`,
 });
 
-type TabsProps = TabsPropsOriginal & {
-    styles: {
-        root?: React.CSSProperties;
-        list?: React.CSSProperties;
-        trigger?: React.CSSProperties;
-        content?: React.CSSProperties;
-    }
-};
-
-const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
-    ({styles, children}, forwardedRef) => (
+const Tabs = React.forwardRef<HTMLDivElement, TabsProps & CSSProps>(
+    ({css, children}, forwardedRef) => (
     <StyledTabs
-        css={{...styles.root}}
+        css={css}
         ref={forwardedRef}
     >
         {children}
@@ -36,10 +37,10 @@ const StyledTabsList = styled(List, {
     borderBottom: `1px solid ${mauve.mauve6}`,
 });
 
-const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
-    ({children, style, ...props}, forwardedRef) => (
+const TabsList = React.forwardRef<HTMLDivElement, TabsListProps & CSSProps>(
+    ({children, css, ...props}, forwardedRef) => (
     <StyledTabsList
-        css={{...style}}
+        css={css}
         ref={forwardedRef}
         {...props}
     >
@@ -71,7 +72,7 @@ const StyledTabsTrigger = styled(Trigger, {
     '&:focus': { position: 'relative', boxShadow: `0 0 0 2px black` },
 });
 
-const TabsTrigger = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof StyledTabsTrigger>>(
+const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps & CSSProps>(
     ({children, style, ...props}, forwardedRef) => (
     <StyledTabsTrigger
         css={{...style}}
@@ -92,10 +93,10 @@ const StyledTabsContent = styled(Content, {
     '&:focus': { boxShadow: `0 0 0 2px black` },
 });
 
-const TabsContent = React.forwardRef<HTMLDivElement, React.ComponentProps<typeof StyledTabsContent>>(
-    ({children, style, ...props}, forwardedRef) => (
+const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps & CSSProps>(
+    ({children, css, ...props}, forwardedRef) => (
     <StyledTabsContent
-        css={{...style}}
+        css={css}
         ref={forwardedRef}
         {...props}
     >

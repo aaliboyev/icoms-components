@@ -149,7 +149,7 @@ const MenuItemList = styled('ul', {
 
 const ListItem = React.forwardRef<HTMLLIElement, HTMLAttributes<HTMLLIElement>>(({ children, title, ...props }, forwardedRef) => (
     <li>
-        <NavigationMenuLink asChild >
+        <NavigationMenuLink asChild>
             <ListItemHeading>{title}</ListItemHeading>
             <ListItemText>{children}</ListItemText>
         </NavigationMenuLink>

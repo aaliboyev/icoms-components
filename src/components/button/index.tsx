@@ -1,22 +1,19 @@
 import * as React from "react"
 import {styled} from "@stitches/react";
+import {CSSProps} from "../../types";
 
-export type StyleProps = {
-    styles?: {
-        root: Record<string, any>
-    }
-}
+export type StyleProps = CSSProps
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & StyleProps
 
 const StyledButton = styled('button', {});
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ children, styles, ...rest }, ref) => {
+    ({ children, css, ...rest }, ref) => {
         return (
             <StyledButton
                 ref={ref}
-                css={{...styles?.root}}
+                css={css}
                 {...rest}
             >{children}</StyledButton>
         )
