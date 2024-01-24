@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.4.1
+
+### Patch Changes
+
+- 1af63d8: Removed styled-components
+
 ## 0.4.0
 
 ### Minor Changes
