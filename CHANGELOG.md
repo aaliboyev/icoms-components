@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.4.0
+
+### Minor Changes
+
+- c466fb8: Refactored and unified style props
+
 ## 0.3.2
 
 ### Patch Changes
