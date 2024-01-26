@@ -8,9 +8,9 @@ type HeadingProps = {
 
 const StyledHeading = styled('h1', {});
 
-const Heading: React.FC<HeadingProps> = ({ level, css, ...props }) => {
-    const Tag = `h${level}` as keyof JSX.IntrinsicElements;
-    return <StyledHeading as={Tag} css={css} {...props} />;
-};
+const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
+    ({ level, css, ...props }, ref) => {
+    return <StyledHeading ref={ref} as={level} css={css} {...props} />;
+})
 
 export default Heading;

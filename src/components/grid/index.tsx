@@ -15,13 +15,12 @@ const Grid = React.forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>& {c
 })
 
 const StyledGridItem = styled('div', {
-    display: 'flex',
     flexWrap: 'wrap',
 })
 
 const GridItem = React.forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>& {css: CSSProps}>(
     ({children, css, ...props}, ref) => {
-    return <StyledGridItem css={css} {...props} ref={ref}>{children}</StyledGridItem>
+    return <StyledGridItem css={css} ref={ref} {...props}>{children}</StyledGridItem>
 })
 
 export {Grid, GridItem}
