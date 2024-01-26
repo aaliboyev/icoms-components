@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.4.2
+
+### Patch Changes
+
+- 96272db: Wrapped heading into forwardref
+
 ## 0.4.1
 
 ### Patch Changes
