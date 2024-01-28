@@ -3,6 +3,7 @@ import * as Carousel from "./components/carousel";
 import * as Tabs from "./components/tab";
 import * as Dialog from "./components/dialog";
 import * as Menubar from "./components/menubar";
+import * as Nav from "./components/nav";
 import * as Grid from "./components/grid";
 import * as Flexbox from "./components/flexbox";
 import * as Table from "./components/table";
@@ -15,4 +16,4 @@ import Heading from "./components/heading";
 import Image from "./components/image";
 import Lightbox from "./components/lightbox";
 
-export {Accordion, Carousel, Tabs, Dialog, Menubar, Grid, Flexbox, Table, Popover, Separator, Container, Button, Anchor, Heading, Image, Lightbox};
+export {Accordion, Carousel, Tabs, Dialog, Menubar, Nav, Grid, Flexbox, Table, Popover, Separator, Container, Button, Anchor, Heading, Image, Lightbox};

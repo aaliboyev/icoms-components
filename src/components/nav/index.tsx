@@ -1,8 +1,24 @@
-import {Root, Trigger, Sub, Item, List, Content, Link, Indicator, Viewport} from '@radix-ui/react-navigation-menu';
+import {
+    Root,
+    Trigger,
+    Sub,
+    Item,
+    List,
+    Content,
+    Link,
+    Indicator,
+    Viewport,
+    NavigationMenuItemProps,
+    NavigationMenuTriggerProps,
+    NavigationMenuLinkProps,
+    NavigationMenuContentProps,
+    NavigationMenuIndicatorProps, NavigationMenuViewportProps, NavigationMenuSubProps
+} from '@radix-ui/react-navigation-menu';
 import {keyframes, styled} from "@stitches/react";
-import {CaretDownIcon} from "@radix-ui/react-icons";
-import {blackA, indigo, mauve, purple, violet} from "@radix-ui/colors";
-import React, {HTMLAttributes} from "react";
+import {blackA, violet} from "@radix-ui/colors";
+import React from "react";
+import {NavigationMenuListProps, NavigationMenuProps} from "@radix-ui/react-navigation-menu/dist";
+import {CSSProps} from "../../types";
 
 
 const enterFromRight = keyframes({
@@ -45,7 +61,7 @@ const fadeOut = keyframes({
     to: { opacity: 0 },
 });
 
-const NavigationMenuRoot = styled(Root, {
+const StyledRoot = styled(Root, {
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
@@ -53,7 +69,14 @@ const NavigationMenuRoot = styled(Root, {
     zIndex: 1,
 });
 
-const NavigationMenuList = styled(List, {
+const Nav = React.forwardRef<HTMLElement, NavigationMenuProps & React.HTMLAttributes<HTMLElement> & CSSProps>(
+    ({css, children, ...rest}, ref) => {
+    return <StyledRoot ref={ref} css={css} {...rest}>
+        {children}
+    </StyledRoot>
+})
+
+const StyledList = styled(List, {
     display: 'flex',
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -63,6 +86,14 @@ const NavigationMenuList = styled(List, {
     boxShadow: `0 2px 10px ${blackA.blackA4}`,
     margin: 0,
 });
+
+const NavList = React.forwardRef<HTMLUListElement, NavigationMenuListProps & React.HTMLAttributes<HTMLUListElement> & CSSProps>(
+    ({css, children, ...rest}, ref) => {
+
+    return <StyledList css={css} ref={ref} {...rest}>
+        {children}
+    </StyledList>
+})
 
 const itemStyles = {
     padding: '8px 12px',
@@ -77,7 +108,13 @@ const itemStyles = {
     '&:hover': { backgroundColor: violet.violet3 },
 };
 
-const NavigationMenuTrigger = styled(Trigger, {
+const StyledItem = styled(Item, {})
+const NavItem = React.forwardRef<HTMLLIElement, NavigationMenuItemProps & React.HTMLAttributes<HTMLLIElement> & CSSProps>(
+    ({css, children, ...rest}, ref) => {
+    return (<StyledItem css={css} ref={ref} {...rest}>{children}</StyledItem>)
+})
+
+const StyledTrigger = styled(Trigger, {
     all: 'unset',
     ...itemStyles,
     display: 'flex',
@@ -85,16 +122,24 @@ const NavigationMenuTrigger = styled(Trigger, {
     justifyContent: 'space-between',
     gap: 2,
 });
+const NavTrigger = React.forwardRef<HTMLButtonElement, NavigationMenuTriggerProps & React.HTMLAttributes<HTMLButtonElement> & CSSProps>(
+    ({css, children, ...rest}, ref) => {
+    return <StyledTrigger css={css} ref={ref} {...rest}>{children}</StyledTrigger>
+})
 
-const NavigationMenuLink = styled(Link, {
+const StyledLink = styled(Link, {
     ...itemStyles,
     display: 'block',
     textDecoration: 'none',
     fontSize: 15,
     lineHeight: 1,
 });
+const NavLink = React.forwardRef<HTMLAnchorElement, NavigationMenuLinkProps & React.HTMLAttributes<HTMLAnchorElement> & CSSProps>(
+    ({css, children, ...rest}, ref) => {
+    return <StyledLink css={css} ref={ref} {...rest}>{children}</StyledLink>
+})
 
-const NavigationMenuContent = styled(Content, {
+const StyledContent = styled(Content, {
     position: 'absolute',
     top: 0,
     left: 0,
@@ -107,8 +152,12 @@ const NavigationMenuContent = styled(Content, {
     '&[data-motion="to-start"]': { animationName: exitToLeft },
     '&[data-motion="to-end"]': { animationName: exitToRight },
 });
+const NavContent = React.forwardRef<HTMLDivElement, NavigationMenuContentProps & React.HTMLAttributes<HTMLDivElement> & CSSProps>(
+    ({css, children, ...rest}, ref) => {
+    return <StyledContent css={css} ref={ref} {...rest}>{children}</StyledContent>
+})
 
-const NavigationMenuIndicator = styled(Indicator, {
+const StyledIndicator = styled(Indicator, {
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'center',
@@ -120,8 +169,12 @@ const NavigationMenuIndicator = styled(Indicator, {
     '&[data-state="visible"]': { animation: `${fadeIn} 200ms ease` },
     '&[data-state="hidden"]': { animation: `${fadeOut} 200ms ease` },
 });
+const NavIndicator = React.forwardRef<HTMLDivElement, NavigationMenuIndicatorProps & React.HTMLAttributes<HTMLDivElement> & CSSProps>(
+    ({css, children, ...rest}, ref) => {
+    return <StyledIndicator css={css} ref={ref} {...rest}>{children}</StyledIndicator>
+})
 
-const NavigationMenuViewport = styled(Viewport, {
+const StyledViewport = styled(Viewport, {
     position: 'relative',
     transformOrigin: 'top center',
     marginTop: 10,
@@ -138,110 +191,17 @@ const NavigationMenuViewport = styled(Viewport, {
         width: 'var(--radix-navigation-menu-viewport-width)',
     },
 });
+const NavViewport = React.forwardRef<HTMLDivElement, NavigationMenuViewportProps & React.HTMLAttributes<HTMLDivElement> & CSSProps>(
+    ({css, ...rest}, ref) => {
+    return <StyledViewport css={css} ref={ref} {...rest} />
+})
 
-const MenuItemList = styled('ul', {
-    display: 'grid',
-    padding: 22,
-    margin: 0,
-    columnGap: 10,
-    listStyle: 'none',
-});
-
-const ListItem = React.forwardRef<HTMLLIElement, HTMLAttributes<HTMLLIElement>>(({ children, title, ...props }, forwardedRef) => (
-    <li>
-        <NavigationMenuLink asChild>
-            <ListItemHeading>{title}</ListItemHeading>
-            <ListItemText>{children}</ListItemText>
-        </NavigationMenuLink>
-    </li>
-));
-
-const ListItemLink = styled('a', {
-    display: 'block',
-    outline: 'none',
-    textDecoration: 'none',
-    userSelect: 'none',
-    padding: 12,
-    borderRadius: 6,
-    fontSize: 15,
-    lineHeight: 1,
-    '&:focus': { boxShadow: `0 0 0 2px ${violet.violet7}` },
-    '&:hover': { backgroundColor: mauve.mauve3 },
-});
-
-const ListItemHeading = styled('div', {
-    fontWeight: 500,
-    lineHeight: 1.2,
-    marginBottom: 5,
-    color: violet.violet12,
-});
-
-const ListItemText = styled('p', {
-    all: 'unset',
-    color: mauve.mauve11,
-    lineHeight: 1.4,
-    fontWeight: 'initial',
-});
-
-const Callout = styled('a', {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    flexDirection: 'column',
-    width: '100%',
-    height: '100%',
-    background: `linear-gradient(135deg, ${purple.purple9} 0%, ${indigo.indigo9} 100%);`,
-    borderRadius: 6,
-    padding: 25,
-    textDecoration: 'none',
-    outline: 'none',
-    userSelect: 'none',
-    '&:focus': { boxShadow: `0 0 0 2px ${violet.violet7}` },
-});
-
-const CalloutHeading = styled('div', {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 500,
-    lineHeight: 1.2,
-    marginTop: 16,
-    marginBottom: 7,
-});
-
-const CalloutText = styled('p', {
-    all: 'unset',
-    color: mauve.mauve4,
-    fontSize: 14,
-    lineHeight: 1.3,
-});
-
-const ViewportPosition = styled('div', {
-    position: 'absolute',
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%',
-    top: '100%',
-    left: 0,
-    perspective: '2000px',
-});
-
-const CaretDown = styled(CaretDownIcon, {
-    position: 'relative',
-    color: violet.violet10,
-    top: 1,
-    transition: 'transform 250ms ease',
-    '[data-state=open] &': { transform: 'rotate(-180deg)' },
-});
-
-const Arrow = styled('div', {
-    position: 'relative',
-    top: '70%',
-    backgroundColor: 'white',
-    width: 10,
-    height: 10,
-    transform: 'rotate(45deg)',
-    borderTopLeftRadius: 2,
-});
+const StyledNavSubmenu = styled(Sub, {})
+const NavSubmenu = React.forwardRef<HTMLDivElement, NavigationMenuSubProps & React.HTMLAttributes<HTMLDivElement> & CSSProps>(
+    ({css, children, ...rest}, ref) => {
+    return <StyledNavSubmenu css={css} ref={ref} {...rest}>{children}</StyledNavSubmenu>
+})
 
 export {
-
+    Nav, NavLink, NavContent, NavViewport, NavList, NavItem, NavTrigger, NavIndicator, NavSubmenu
 }

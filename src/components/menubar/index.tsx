@@ -21,7 +21,6 @@ import React from "react";
 import {MenubarContentProps, MenubarItemProps} from "@radix-ui/react-menubar/dist";
 // import { CheckIcon, ChevronRightIcon, DotFilledIcon } from '@radix-ui/react-icons';
 
-
 const itemStyles = {
     all: 'unset',
     fontSize: 13,
@@ -65,7 +64,6 @@ const contentStyles = {
     willChange: 'transform, opacity',
 };
 
-
 const StyledRoot = styled(Root, {
     display: 'flex',
     backgroundColor: 'white',
@@ -73,9 +71,10 @@ const StyledRoot = styled(Root, {
     borderRadius: 6,
     boxShadow: `0 2px 10px ${blackA.blackA4}`,
 });
+
 const Menubar = React.forwardRef<HTMLDivElement, MenubarProps & React.RefAttributes<HTMLDivElement> & CSSProps>(
-    ({children, css, ...props}) => {
-        return <StyledRoot css={css} {...props}>
+    ({children, css, ...props}, ref) => {
+        return <StyledRoot css={css} {...props} ref={ref}>
             {children}
         </StyledRoot>
 })
@@ -83,14 +82,13 @@ const Menubar = React.forwardRef<HTMLDivElement, MenubarProps & React.RefAttribu
 
 const StyledGroup = styled(Group, {});
 const MenubarGroup = React.forwardRef<HTMLDivElement, MenubarGroupProps & React.RefAttributes<HTMLDivElement> & CSSProps>(
-    ({css, children, ...rest}) => {
-        return <StyledGroup css={css} {...rest}>{children}</StyledGroup>
+    ({css, children, ...rest}, ref) => {
+        return <StyledGroup css={css} {...rest} ref={ref}>{children}</StyledGroup>
 });
 
 const StyledTrigger = styled(Trigger, {
     all: 'unset',
     padding: '8px 12px',
-    outline: 'none',
     userSelect: 'none',
     fontWeight: 500,
     lineHeight: 1,
