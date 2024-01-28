@@ -244,19 +244,18 @@ const CarouselNext = React.forwardRef<
         borderRadius: "50%",
         width: "1.5rem",
         height: "1.5rem",
-    }
-    let h = {
         right: "-3rem",
         top: "50%",
         transform: "translateY(-50%)"
     }
+
     let v = {
         bottom: "-3rem",
         left: "50%",
         transform: "translateX(-50%) rotate(90deg)",
     }
+
     if (orientation === "vertical") baseStyles = {...baseStyles, ...v}
-    else baseStyles = {...baseStyles, ...h}
     let style = {...baseStyles, ...css}
 
     return (
@@ -267,6 +266,7 @@ const CarouselNext = React.forwardRef<
             onClick={scrollNext}
             {...props}
         >
+            {children}
             <SrOnlySpan />
         </Button>
     )

@@ -4,9 +4,7 @@ import {styled} from "@stitches/react";
 import {CSSProps} from "../../types";
 
 const StyledTrigger = styled(PopoverPrimitive.Trigger, {
-    backgroundColor: "#444",
     borderRadius: "0.375rem",
-    color: "#fff",
     cursor: "pointer",
     display: "inline-block",
     padding: "0.5rem",
@@ -17,12 +15,9 @@ const StyledTrigger = styled(PopoverPrimitive.Trigger, {
 })
 
 const StyledContent = styled(PopoverPrimitive.Content, {
-    backgroundColor: "#444",
     borderRadius: "0.375rem",
     boxShadow: "0 0 0 1px $colors$popoverBorder",
-    color: "#fff",
     padding: "0.5rem",
-    width: "20rem",
     zIndex: 50,
     "&:focus": {
         outline: "none",

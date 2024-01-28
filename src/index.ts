@@ -8,7 +8,6 @@ import * as Flexbox from "./components/flexbox";
 import * as Table from "./components/table";
 import * as Popover from "./components/popover";
 import Separator from "./components/separator";
-import Video from "./components/video";
 import Container from "./components/container";
 import Button from "./components/button";
 import Anchor from "./components/anchor";
@@ -16,4 +15,4 @@ import Heading from "./components/heading";
 import Image from "./components/image";
 import Lightbox from "./components/lightbox";
 
-export {Accordion, Carousel, Tabs, Dialog, Menubar, Grid, Flexbox, Table, Popover, Separator, Video, Container, Button, Anchor, Heading, Image, Lightbox};
+export {Accordion, Carousel, Tabs, Dialog, Menubar, Grid, Flexbox, Table, Popover, Separator, Container, Button, Anchor, Heading, Image, Lightbox};

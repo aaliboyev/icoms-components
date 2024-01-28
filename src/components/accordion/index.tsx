@@ -11,7 +11,7 @@ import {
 import {AccordionSingleProps, AccordionMultipleProps} from "@radix-ui/react-accordion";
 import { styled, keyframes, CSSProperties } from '@stitches/react';
 import { violet, blackA, mauve } from '@radix-ui/colors';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
+// import { ChevronDownIcon } from '@radix-ui/react-icons';
 import {CSSProps} from "../../types";
 
 
@@ -114,17 +114,8 @@ const slideUp = keyframes({
     to: { height: 0 },
 });
 const StyledContent = styled(Content, {
-    overflow: 'hidden',
-    fontSize: 15,
-    color: mauve.mauve11,
-    backgroundColor: mauve.mauve2,
-
-    '&[data-state="open"]': {
-        animation: `${slideDown} 300ms cubic-bezier(0.87, 0, 0.13, 1)`,
-    },
-    '&[data-state="closed"]': {
-        animation: `${slideUp} 300ms cubic-bezier(0.87, 0, 0.13, 1)`,
-    },
+    '&[data-state="open"]': {animation: `${slideDown} 300ms cubic-bezier(0.87, 0, 0.13, 1)`,},
+    '&[data-state="closed"]': {animation: `${slideUp} 300ms cubic-bezier(0.87, 0, 0.13, 1)`,},
 });
 type ContentProps = AccordionContentProps & CSSProps
 
