@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.5.0
+
+### Minor Changes
+
+- d38daca: refactored menu, popover, removed react player
+
 ## 0.4.2
 
 ### Patch Changes
