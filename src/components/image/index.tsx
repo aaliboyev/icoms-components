@@ -11,15 +11,17 @@ type ImageProps = {
 
 const StyledImage = styled('img', {});
 
-const Image: React.FC<ImageProps> = ({ src, alt, css, ...props }) => {
-    const comp = <StyledImage src={src} alt={alt} css={css} {...props} />;
+const Image = React.forwardRef<HTMLDivElement | HTMLImageElement, ImageProps>(
+    ({ src, alt, css, ...props }, ref) => {
     if (props.aspectRatio) {
-        return <AspectRatio ratio={props.aspectRatio[0] / props.aspectRatio[1]}>
-            {comp}
+        return <AspectRatio ref={ref} ratio={props.aspectRatio[0] / props.aspectRatio[1]}>
+            <StyledImage src={src} alt={alt} css={css} {...props} />
         </AspectRatio>
     }
-    return comp
-};
+    return <AspectRatio ref={ref}>
+        <StyledImage src={src} alt={alt} css={css} {...props} />
+    </AspectRatio>
+})
 
 Image.displayName = 'Image';
 

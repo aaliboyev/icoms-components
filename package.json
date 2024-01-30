@@ -37,6 +37,7 @@
     "@storybook/react-vite": "^7.6.10",
     "@storybook/test": "^7.6.10",
     "@storybook/theming": "^7.6.10",
+    "@types/lodash": "^4.14.202",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react": "^4.2.1",
@@ -59,9 +60,11 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@stitches/react": "^1.2.8",
     "embla-carousel-react": "8.0.0-rc19",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-photo-album": "^2.3.0"
+    "react-photo-album": "^2.3.0",
+    "yet-another-react-lightbox": "^3.16.0"
   },
   "keywords": [
     "react",

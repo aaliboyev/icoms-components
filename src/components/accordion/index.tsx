@@ -9,8 +9,8 @@ import {
     AccordionContentProps, AccordionItemProps
 } from '@radix-ui/react-accordion';
 import {AccordionSingleProps, AccordionMultipleProps} from "@radix-ui/react-accordion";
-import { styled, keyframes, CSSProperties } from '@stitches/react';
-import { violet, blackA, mauve } from '@radix-ui/colors';
+import { styled, keyframes } from '@stitches/react';
+import { mauve } from '@radix-ui/colors';
 // import { ChevronDownIcon } from '@radix-ui/react-icons';
 import {CSSProps} from "../../types";
 
@@ -22,7 +22,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>((
     { children, css, ...rest },
     forwardedRef
 ) => (
-    <StyledAccordionRoot ref={forwardedRef} css={{css}} {...rest}>
+    <StyledAccordionRoot ref={forwardedRef} css={css} {...rest}>
         {children}
     </StyledAccordionRoot>
 ));
@@ -87,10 +87,7 @@ const StyledTrigger = styled(Trigger, {
     justifyContent: 'space-between',
     fontSize: 15,
     lineHeight: 1,
-    color: violet.violet11,
     boxShadow: `0 1px 0 ${mauve.mauve6}`,
-    backgroundColor: 'white',
-    '&:hover': { backgroundColor: mauve.mauve2 },
 });
 
 type TriggerProps = AccordionTriggerProps & CSSProps

@@ -12,7 +12,14 @@ export type StyleProps = {
 
 export type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & StyleProps
 
-const StyledAnchor = styled('a', {});
+const StyledAnchor = styled('a', {
+    display: "inline-block",
+    // Default button styles below
+    padding: "0.5rem 1rem",
+    borderRadius: "0.25rem",
+    fontSize: "1rem",
+    lineHeight: "1.5",
+});
 
 const Anchor = React.forwardRef<HTMLAnchorElement, AnchorProps>(
     ({children, css, action="link", href="#", ...rest}, ref) => {
