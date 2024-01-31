@@ -1,5 +1,16 @@
 # icoms-components
 
+## 0.6.0
+
+### Minor Changes
+
+- 6b9159e: added lightbox and slides
+
+### Patch Changes
+
+- aef8a75: Minor improvements
+- 194e236: Finished navmenu and renamed it to nav
+
 ## 0.5.0
 
 ### Minor Changes
