@@ -32,7 +32,6 @@ const Gallery = React.forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
         lightboxProps,
         css, ...rest}, ref) => {
         const [index, setIndex] = React.useState(-1);
-
     const {photos, ...apRest} = {...albumProps};
     const album = _.merge({}, {
         layout: "masonry",
@@ -46,7 +45,7 @@ const Gallery = React.forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
         slideTransition: "slide",
     }, lpRest);
     return (
-        <StyledDiv css={css}>
+        <StyledDiv css={css} ref={ref}>
             <PhotoAlbum
                 photos={items}
                 onClick={({ index: current }) => setIndex(current)}
