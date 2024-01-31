@@ -65,7 +65,6 @@ const StyledRoot = styled(Root, {
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
-    width: '100vw',
     zIndex: 1,
 });
 
@@ -79,8 +78,6 @@ const Nav = React.forwardRef<HTMLElement, NavigationMenuProps & React.HTMLAttrib
 const StyledList = styled(List, {
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: 'white',
-    padding: 4,
     borderRadius: 6,
     listStyle: 'none',
     boxShadow: `0 2px 10px ${blackA.blackA4}`,
@@ -96,14 +93,10 @@ const NavList = React.forwardRef<HTMLUListElement, NavigationMenuListProps & Rea
 })
 
 const itemStyles = {
-    padding: '8px 12px',
-    outline: 'none',
-    userSelect: 'none',
     fontWeight: 500,
     lineHeight: 1,
     borderRadius: 4,
     fontSize: 15,
-    color: violet.violet11,
     '&:focus': { boxShadow: `0 0 0 2px ${violet.violet7}` },
     '&:hover': { backgroundColor: violet.violet3 },
 };
@@ -120,7 +113,6 @@ const StyledTrigger = styled(Trigger, {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 2,
 });
 const NavTrigger = React.forwardRef<HTMLButtonElement, NavigationMenuTriggerProps & React.HTMLAttributes<HTMLButtonElement> & CSSProps>(
     ({css, children, ...rest}, ref) => {
@@ -140,9 +132,9 @@ const NavLink = React.forwardRef<HTMLAnchorElement, NavigationMenuLinkProps & Re
 })
 
 const StyledContent = styled(Content, {
-    position: 'absolute',
-    top: 0,
-    left: 0,
+    // position: 'absolute',
+    // top: 0,
+    // left: 0,
     width: '100%',
     '@media only screen and (min-width: 600px)': { width: 'auto' },
     animationDuration: '250ms',
@@ -169,6 +161,7 @@ const StyledIndicator = styled(Indicator, {
     '&[data-state="visible"]': { animation: `${fadeIn} 200ms ease` },
     '&[data-state="hidden"]': { animation: `${fadeOut} 200ms ease` },
 });
+
 const NavIndicator = React.forwardRef<HTMLDivElement, NavigationMenuIndicatorProps & React.HTMLAttributes<HTMLDivElement> & CSSProps>(
     ({css, children, ...rest}, ref) => {
     return <StyledIndicator css={css} ref={ref} {...rest}>{children}</StyledIndicator>
@@ -179,7 +172,6 @@ const StyledViewport = styled(Viewport, {
     transformOrigin: 'top center',
     marginTop: 10,
     width: '100%',
-    backgroundColor: 'white',
     borderRadius: 6,
     overflow: 'hidden',
     boxShadow: 'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
