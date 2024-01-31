@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.6.1
+
+### Patch Changes
+
+- 81a22b2: Minor updates for nav elements
+
 ## 0.6.0
 
 ### Minor Changes
