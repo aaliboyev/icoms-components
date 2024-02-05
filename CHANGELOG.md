@@ -1,5 +1,11 @@
 # icoms-components
 
+## 0.6.2
+
+### Patch Changes
+
+- 56de090: Fixed carousel css props
+
 ## 0.6.1
 
 ### Patch Changes
