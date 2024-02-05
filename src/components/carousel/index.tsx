@@ -2,7 +2,6 @@ import * as React from "react"
 import useEmblaCarousel, {
     type UseEmblaCarouselType,
 } from "embla-carousel-react"
-import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons"
 import Button from "../button"
 import {styled} from "@stitches/react";
 import {SrOnlySpan} from "../../utils/styles";
@@ -18,10 +17,7 @@ type CarouselProps = {
     plugins?: CarouselPlugin
     orientation?: "horizontal" | "vertical"
     setApi?: (api: CarouselApi) => void
-    styles?: {
-        root: Record<string, any>
-    }
-}
+} & CSSProps
 
 type CarouselContextProps = {
     carouselRef: ReturnType<typeof useEmblaCarousel>[0]
@@ -135,7 +131,7 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
                 <StyledDiv
                     ref={ref}
                     onKeyDownCapture={handleKeyDown}
-                    css={{position: "relative", ...props.styles?.root}}
+                    css={{position: "relative", ...props.css}}
                     role="region"
                     aria-roledescription="carousel"
                     {...props}
@@ -198,7 +194,7 @@ CarouselItem.displayName = "CarouselItem"
 // Carousel Previous
 const CarouselPrevious = React.forwardRef<
     HTMLButtonElement,
-    React.ComponentProps<typeof Button>
+    React.ComponentProps<typeof Button> & CSSProps
 >(({children, css, ...props}, ref) => {
     const { orientation, scrollPrev, canScrollPrev } = useCarousel()
     let baseStyles = {
